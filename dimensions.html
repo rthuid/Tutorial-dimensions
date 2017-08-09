@@ -1,0 +1,166 @@
+<html>
+<head>
+  <title>js tutorial/ Dimensions</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <style type="text/css">
+    .maskWrapper{
+      width:500px;
+      height:500px;
+      margin: 2% auto;
+      padding: 0;
+      border: 1px solid #ccc;
+      position: relative;
+    }
+    #mask {
+      background-color: #fff;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #ccc;
+      position: absolute;
+    }
+    #mask i{
+      font-size: 50px;
+      left: 21px;
+      top: 21px;
+    }
+    .maskWrapper ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 503px;
+      height: 503px;
+      border: 1px solid #ccc;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .maskWrapper ul li{
+      float: left;
+      width: 100px;
+      height: 100px;
+      font-size: 30px;
+      border: 1px solid #ccc;
+      text-align: center;
+      padding-top: 25px;
+    }
+    .controls{
+      width: 120px;
+      margin: 2% auto;
+    }
+  </style>
+  <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+    /**
+     * On Control button click move the mask
+     */
+    $('.controls .btn').click(function(){
+      const dir = $(this).attr('rel');
+      const mask = $('#mask');
+      const height = mask.height();
+      const width = mask.width();
+      let offset = mask.offset();
+      switch (dir) {
+        case 'up':
+          offset.top = offset.top - height;
+          break;
+        case 'left':
+          offset.left = offset.left - width;
+          break;
+        case 'right':
+          offset.left = offset.left + width;
+          break;
+        case 'down':
+          offset.top = offset.top + height;
+          break;
+        default:
+          break;
+      }
+      mask.offset(offset);
+    });
+
+    /**
+     * Print column content of each li using find and each function
+     */
+    $('#printBtn').click(function(){
+      $('.maskWrapper').find('li').each(function(index){
+        let item = $("<span />");
+        item.text(";  "+index+": "+$(this).text());
+        $('#printBox').append(item);
+      });
+    });
+
+    /**
+     * Clear printDiv Content
+     */
+    $('#printClear').click(function(){
+      $('#printBox').children().remove();
+    });
+
+
+  });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="controls">
+      <table>
+        <tr>
+          <td></td>
+          <td><button class="btn btn-default" rel="up"><i class="glyphicon glyphicon-arrow-up" /></button></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><button class="btn btn-default" rel="left"><i class="glyphicon glyphicon-arrow-left" /></button></td>
+          <td></td>
+          <td><button class="btn btn-default" rel="right"><i class="glyphicon glyphicon-arrow-right" /></button></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button class="btn btn-default" rel="down"><i class="glyphicon glyphicon-arrow-down" /></button></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="maskWrapper">
+      <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+        <li>F</li>
+        <li>G</li>
+        <li>H</li>
+        <li>I</li>
+        <li>J</li>
+        <li>K</li>
+        <li>L</li>
+        <li>M</li>
+        <li>N</li>
+        <li>O</li>
+        <li>P</li>
+        <li>Q</li>
+        <li>R</li>
+        <li>S</li>
+        <li>T</li>
+        <li>U</li>
+        <li>V</li>
+        <li>W</li>
+        <li>X</li>
+        <li>Y</li>
+      </ul>
+      <div id="mask">
+        <i class="glyphicon glyphicon-ban-circle"></i>
+      </div>
+    </div>
+    <div>
+      <div id="printBox"></div>
+      <input type="button" value="print cols" id="printBtn" class="btn btn-default"/>
+      <input type="button" value="Clear" id="printClear" class="btn btn-default"/>
+      <br />
+    </div>
+  </div>
+</body>
+</html>
